@@ -36,6 +36,13 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\..\External\Packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\..\..\External\Packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -46,14 +53,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\DataContextService.cs" />
+    <Compile Include="BL\ExpenseIconService.cs" />
+    <Compile Include="BL\ExpenseItemService.cs" />
+    <Compile Include="BL\UserService.cs" />
+    <Compile Include="BL\ExpenseService.cs" />
+    <Compile Include="BL\UnitOfWorkContext.cs" />
+    <Compile Include="Contracts\ExpenseIconLightDto.cs" />
+    <Compile Include="Contracts\ExpenseItemLightDto.cs" />
+    <Compile Include="Contracts\UserLightDto.cs" />
+    <Compile Include="Migrations\201403021819224_Init2.cs" />
+    <Compile Include="Migrations\201403021819224_Init2.Designer.cs">
+      <DependentUpon>201403021819224_Init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnityConfig.cs" />
+    <Compile Include="Contracts\ExpenseLightDto.cs" />
+    <Compile Include="BL\AmountType.cs" />
     <Compile Include="DL\DbDataContext.cs" />
-    <Compile Include="DL\Expense.cs" />
-    <Compile Include="DL\ExpenseItem.cs" />
+    <Compile Include="BL\Expense.cs" />
+    <Compile Include="BL\ExpenseItem.cs" />
+    <Compile Include="BL\ExpenseIcon.cs" />
+    <Compile Include="BL\User.cs" />
+    <Compile Include="Migrations\201403020926084_Init.cs" />
+    <Compile Include="Migrations\201403020926084_Init.Designer.cs">
+      <DependentUpon>201403020926084_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201403020926084_Init.resx">
+      <DependentUpon>201403020926084_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403021819224_Init2.resx">
+      <DependentUpon>201403021819224_Init2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

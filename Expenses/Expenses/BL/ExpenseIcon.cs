@@ -4,17 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
-namespace Expenses.DL
+namespace Expenses.BL
 {
-    public class ExpenseItem
+    public class ExpenseIcon
     {
         public int Id { get; set; }
 
         [Required]
-        public Expense Expense { get; set; }
+        public string Name { get; set; }
 
-        public decimal Amount { get; set; }
+        public byte[] Data { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public string ContentType { get; set; }
     }
 }

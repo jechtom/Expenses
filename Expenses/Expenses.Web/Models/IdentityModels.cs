@@ -10,7 +10,7 @@ namespace Expenses.Web.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base("Expenses.DL.DbDataContext")
         {
         }
     }

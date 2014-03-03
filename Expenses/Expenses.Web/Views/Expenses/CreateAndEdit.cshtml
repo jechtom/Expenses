@@ -1,0 +1,75 @@
+﻿@model ExpensesCreateAndEditModel
+
+@{
+    ViewBag.Title = Model.CreateNew ? "Create new expense" : "Edit expense";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Expense</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Expense.Name, "Name", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Expense.Name)
+                @Html.ValidationMessageFor(model => model.Expense.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Expense.AmountType, "Amount type", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Expense.AmountType)
+                @Html.ValidationMessageFor(model => model.Expense.AmountType)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Expense.CreatorUserId, "Creator", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Expense.CreatorUserId, new SelectList(Model.Users, "Id", "FullName"))
+                @Html.ValidationMessageFor(model => model.Expense.CreatorUserId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Expense.IconId, "Icon", new { @class = "control-label col-md-2" })
+        </div>
+        <div class="form-group">
+            @foreach (var icon in Model.Icons)
+            {
+                <div class="col-md-1 col-sm-2 col-xs-4">
+                    <label> 
+                        <input type="radio" name="Expense.IconId" value="@icon.Id" checked="@((Model.Expense.IconId == icon.Id) ? "checked" : null)" />
+                        <span style="width: 48px; height: 48px; display: inline-block; background-image: url('@Url.Action("GetFile", "ExpenseIcon", new { id = icon.Id })')" />
+                    </label>
+                </div>
+            }
+            <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.Expense.IconId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@(Model.CreateNew ? "Create" : "Update")" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

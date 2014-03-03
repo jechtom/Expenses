@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Expenses.DL
+namespace Expenses.Contracts
 {
-    public class Expense
+    public class ExpenseIconLightDto
     {
         public int Id { get; set; }
-
-        public virtual ICollection<ExpenseItem> Items { get; set; }
-
         public string Name { get; set; }
 
-        public 
+        public string ContentType { get; set; }
     }
 }

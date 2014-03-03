@@ -1,0 +1,49 @@
+﻿@model ExpenseItemCreateAndEditModel
+
+@{
+    ViewBag.Title = (Model.CreateNew ? "New item for " : "Edit item for ") + Model.Expense.Name;
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Expense item for @Model.Expense.Name</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpenseItem.Amount, "Amount", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ExpenseItem.Amount)
+                @Html.ValidationMessageFor(model => model.ExpenseItem.Amount)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpenseItem.CreatorUserId, "Creator", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ExpenseItem.CreatorUserId, new SelectList(Model.Users, "Id", "FullName"))
+                @Html.ValidationMessageFor(model => model.ExpenseItem.CreatorUserId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@(Model.CreateNew ? "Create" : "Update")" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to expense", "Details", "Expenses" , new { id = Model.Expense.Id }, null)
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

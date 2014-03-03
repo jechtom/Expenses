@@ -1,0 +1,49 @@
+﻿@model UserDetailsModel
+
+@{
+    ViewBag.Title = "User details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>User @Model.User.FullName</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            Owned
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Expenses)
+            @if (Model.User.Expenses.Count == 0)
+            {
+            @:No owned expenses.
+            }
+            <br />@Html.ActionLink("Create", "Create", "Expenses", new { userId = Model.User.Id }, null)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            Expenses
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.ExpenseItems)
+            @if (Model.User.Expenses.Count == 0)
+            {
+                @:No expenses.
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.User.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

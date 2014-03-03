@@ -1,0 +1,69 @@
+﻿@model ExpensesDetailsModel
+
+@{
+    ViewBag.Title = "Expense " + Model.Expense.Name;
+}
+
+<h2><img src="@Url.Action("GetFile", "ExpenseIcon", new { id = Model.Expense.Icon.Id })" /> @ViewBag.Title</h2>
+
+<div>
+    <h4>Expense</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expense.Name)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            Author
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expense.Creator.FullName)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            Items
+        </dt>
+        <dd>
+            @Html.ActionLink("Create new", "Create", "ExpenseItem", new { expenseId = Model.Expense.Id }, null)<br />
+            <table class="table">
+                <tr>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th>Amount</th>
+                    <th></th>
+                </tr>
+                @if (Model.Expense.Items.Count == 0)
+                {
+                    <tr>
+                        <td colspan="4">No items.</td>
+                    </tr>
+                }
+                @foreach (var item in Model.Expense.Items)
+                {
+                    <tr>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.Creator.FullName</td>
+                        <td>@item.Amount</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "ExpenseItem", new { id = item.Id }, null) |
+                            @Html.ActionLink("Delete", "Delete", "ExpenseItem", new { id = item.Id }, null)
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Expense.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
