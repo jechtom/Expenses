@@ -30,6 +30,7 @@ namespace Expenses.BL
             var result = DataContext.ExpenseItem.Create();
             result.Expense = expense;
             result.CreatedDate = DateTime.Now;
+            expense.Items.Add(result);
             return result;
         }
     }

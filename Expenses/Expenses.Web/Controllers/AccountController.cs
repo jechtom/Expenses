@@ -9,17 +9,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Expenses.Web.Models;
+using Microsoft.Practices.Unity;
 
 namespace Expenses.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
-        {
-        }
-
+        
         public AccountController(UserManager<ApplicationUser> userManager)
         {
             UserManager = userManager;

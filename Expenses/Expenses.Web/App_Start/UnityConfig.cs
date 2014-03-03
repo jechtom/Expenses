@@ -1,6 +1,10 @@
 using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
+using Expenses.Web.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace Expenses.Web.App_Start
 {
@@ -37,7 +41,11 @@ namespace Expenses.Web.App_Start
             // container.LoadConfiguration();
 
             // TODO: Register your types here
-            // container.RegisterType<IProductRepository, ProductRepository>();
+
+            // register identity EF context & EF user store
+            container.RegisterType<IUserStore<ApplicationUser>>(new PerRequestLifetimeManager(), 
+                    new InjectionFactory(c => new UserStore<ApplicationUser>(new ApplicationDbContext()))
+                );
         }
     }
 }

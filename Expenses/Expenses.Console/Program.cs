@@ -13,7 +13,7 @@ namespace Expenses.Console
         static void Main(string[] args)
         {
             var container = new UnityContainer();
-            Expenses.UnityConfig.RegisterTypes(container, new ContainerControlledLifetimeManager()); // single data context
+            Expenses.UnityConfig.RegisterTypes(container, () => new ContainerControlledLifetimeManager()); // single data context
 
             var context = container.Resolve<BL.UnitOfWorkContext>();
             var iconsService = container.Resolve<BL.ExpenseIconService>();
