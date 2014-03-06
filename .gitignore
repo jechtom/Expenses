@@ -6,6 +6,9 @@
 *.user
 *.sln.docstates
 
+# External package cache
+External/Packages
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

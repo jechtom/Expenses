@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Castle.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,6 @@ namespace Expenses.BL
 {
     public abstract class DataContextService
     {
-        [Dependency]
         public DL.DbDataContext DataContext { get; set; }
     }
 }

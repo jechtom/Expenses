@@ -1,5 +1,4 @@
 ﻿using Expenses.BL;
-using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +9,8 @@ namespace Expenses.Web.Controllers
 {
     public class UserController : Controller
     {
-        [Dependency]
         public UserService Users { get; set; }
 
-        [Dependency]
         public BL.UnitOfWorkContext Context { get; set; }
 
         //

@@ -1,5 +1,4 @@
 ﻿using Expenses.BL;
-using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,6 @@ namespace Expenses.Web.Controllers
 {
     public class ExpenseIconController : Controller
     {
-        [Dependency]
         public ExpenseIconService IconService { get; set; }
 
         public ActionResult GetFile(int id)

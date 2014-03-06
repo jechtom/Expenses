@@ -9,7 +9,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Expenses.Web.Models;
-using Microsoft.Practices.Unity;
 
 namespace Expenses.Web.Controllers
 {

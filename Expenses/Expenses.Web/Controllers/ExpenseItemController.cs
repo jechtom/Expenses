@@ -1,5 +1,4 @@
 ﻿using Expenses.BL;
-using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +9,12 @@ namespace Expenses.Web.Controllers
 {
     public class ExpenseItemController : Controller
     {
-        [Dependency]
         public ExpenseItemService ExpenseItems { get; set; }
 
-        [Dependency]
         public ExpenseService Expenses { get; set; }
 
-        [Dependency]
         public UserService Users { get; set; }
         
-        [Dependency]
         public BL.UnitOfWorkContext Context { get; set; }
 
         //
