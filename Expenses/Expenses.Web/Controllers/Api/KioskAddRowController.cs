@@ -4,9 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Expenses.Web.Controllers.Api
 {
+    [EnableCors]
     public class KioskAddRowController : ApiController
     {
         public SL.Kiosk.KioskService Service { get; set; }
