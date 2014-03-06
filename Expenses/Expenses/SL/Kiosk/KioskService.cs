@@ -15,6 +15,8 @@ namespace Expenses.SL.Kiosk
         public BL.ExpenseItemService ExpenseItems { get; set; }
         public BL.UserService Users { get; set; }
         public BL.UnitOfWorkContext Context { get; set; }
+
+        public DL.DbDataContext DataContext { get; set; }
         
         public KioskScreenDataDto GetScreenDataForExpense(int expenseId)
         {
@@ -34,7 +36,15 @@ namespace Expenses.SL.Kiosk
             };
 
             // resolve users
-            result.Users = new KioskUserInfoDto[] {};
+            result.Users = DataContext.Users.Select(u => new KioskUserInfoDto()
+            {
+                FullName = u.FullName,
+                UserId = u.Id,
+                IsInRequestQueue = false,
+                WaitingQueueQuantity = null,
+                TotalQuantity = u.ExpenseItems.Where(e => e.Id == expense.Id).Sum(e => (decimal?)e.Amount) ?? 0
+            }).ToArray();
+
             return result;
         }
 
