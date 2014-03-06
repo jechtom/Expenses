@@ -42,8 +42,8 @@ namespace Expenses.SL.Kiosk
                 UserId = u.Id,
                 IsInRequestQueue = false,
                 WaitingQueueQuantity = null,
-                TotalQuantity = u.ExpenseItems.Where(e => e.Id == expense.Id).Sum(e => (decimal?)e.Amount) ?? 0,
-                LastExpenseRowCreated = u.ExpenseItems.Where(e => e.Id == expense.Id).Max(e => (DateTime?)e.CreatedDate)
+                TotalQuantity = u.ExpenseItems.Where(e => e.Expense.Id == expense.Id).Sum(e => (decimal?)e.Amount) ?? (decimal)0,
+                LastExpenseRowCreated = u.ExpenseItems.Where(e => e.Expense.Id == expense.Id).Max(e => (DateTime?)e.CreatedDate)
             }).ToArray();
 
             return result;
