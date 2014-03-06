@@ -8,7 +8,7 @@ using System.Web.Http.Cors;
 
 namespace Expenses.Web.Controllers.Api
 {
-    [EnableCors]
+    [EnableCors("*", "*", "GET")]
     public class KioskController : ApiController
     {
         public SL.Kiosk.KioskService Service { get; set; }
