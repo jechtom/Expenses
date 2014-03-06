@@ -193,9 +193,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\WindsorConfig.cs" />
+    <Compile Include="Code\WindsorHttpControllerActivator.cs" />
     <Compile Include="Code\WindsorControllerFactory.cs" />
     <Compile Include="Code\WindsorDependencyResolver.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\KioskController.cs" />
     <Compile Include="Controllers\ExpenseIconController.cs" />
     <Compile Include="Controllers\ExpenseItemController.cs" />
     <Compile Include="Controllers\UserController.cs" />

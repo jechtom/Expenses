@@ -8,9 +8,7 @@ namespace Expenses.Contracts.Kiosk
 {
     public interface IKioskService
     {
-    
         KioskScreenDataDto GetScreenDataForExpense(int expenseId);
         void AddExpenseRow(AddExpenseRowRequestDto data);
-        FileDataDto GetExpenseIconData(int iconId);
     }
 }

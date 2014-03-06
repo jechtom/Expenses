@@ -10,8 +10,6 @@ namespace Expenses.Web.Code
 {
     public class WindsorControllerFactory : DefaultControllerFactory
     {
-        public const string ScopeComponentName = "WindsorScopeComponent";
-
         private IWindsorContainer container;
         public WindsorControllerFactory(Castle.Windsor.IWindsorContainer container)
         {
@@ -20,7 +18,7 @@ namespace Expenses.Web.Code
 
         protected override IController GetControllerInstance(System.Web.Routing.RequestContext requestContext, Type controllerType)
         {
-            container.Resolve<IDisposable>(ScopeComponentName); // ensure scope
+            container.Resolve<IDisposable>(App_Start.WindsorConfig.ScopeComponentName); // ensure scope
             return container.Resolve(controllerType) as IController;
         }
     }

@@ -21,5 +21,10 @@ namespace Expenses.BL
 
         [Required]
         public virtual User Creator { get; set; }
+
+        public decimal GetTotalQuantity()
+        {
+            return Items.Sum(i => i.Amount);
+        }
     }
 }

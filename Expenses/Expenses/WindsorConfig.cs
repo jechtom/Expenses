@@ -16,7 +16,8 @@ namespace Expenses
             container.Register(
                     Component.For<BL.UnitOfWorkContext>().LifestyleScoped(),
                     Component.For<DL.DbDataContext>().LifestyleScoped(),
-                    Classes.FromThisAssembly().InNamespace("Expenses.BL").If(t => t.Name.EndsWith("Service")).LifestyleScoped()
+                    Classes.FromThisAssembly().InNamespace("Expenses.BL", true).If(t => t.Name.EndsWith("Service")).LifestyleScoped(),
+                    Classes.FromThisAssembly().InNamespace("Expenses.SL", true).If(t => t.Name.EndsWith("Service")).LifestyleScoped()
                 );
         }
     }

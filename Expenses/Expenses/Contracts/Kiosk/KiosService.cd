@@ -10,12 +10,9 @@
   <Class Name="Expenses.Contracts.Kiosk.KioskScreenDataDto">
     <Position X="2.25" Y="5.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAACAAAAgAAAgAAAAAAACAAAAAABQAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAACAAAAgAAAgAAAAAAAAAAAAAABQAAAAAAAAAAAA=</HashCode>
       <FileName>Contracts\Kiosk\KioskScreenDataDto.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="KioskUserInfoDto" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Expenses.Contracts.Kiosk.KioskUserInfoDto">
     <Position X="6.25" Y="5" Width="2" />

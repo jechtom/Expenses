@@ -61,7 +61,6 @@
     <Compile Include="Contracts\ExpenseIconLightDto.cs" />
     <Compile Include="Contracts\ExpenseItemLightDto.cs" />
     <Compile Include="Contracts\Kiosk\AddExpenseRowRequestDto.cs" />
-    <Compile Include="Contracts\FileDataDto.cs" />
     <Compile Include="Contracts\Kiosk\IKioskService.cs" />
     <Compile Include="Contracts\Kiosk\KioskScreenDataDto.cs" />
     <Compile Include="Contracts\Kiosk\KioskUserInfoDto.cs" />

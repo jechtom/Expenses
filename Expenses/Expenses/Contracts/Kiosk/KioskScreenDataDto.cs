@@ -12,16 +12,5 @@ namespace Expenses.Contracts.Kiosk
         public decimal TotalQuantity { get; set; }
         public int IconId { get; set; }
         public KioskUserInfoDto[] Users { get; set; }
-
-        public KioskUserInfoDto KioskUserInfoDto
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
     }
 }
