@@ -197,6 +197,7 @@
     <Compile Include="Code\WindsorControllerFactory.cs" />
     <Compile Include="Code\WindsorDependencyResolver.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\KioskAddRowController.cs" />
     <Compile Include="Controllers\Api\KioskController.cs" />
     <Compile Include="Controllers\ExpenseIconController.cs" />
     <Compile Include="Controllers\ExpenseItemController.cs" />
@@ -224,6 +225,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <None Include="Controllers\Api\KioskApiReadme.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
