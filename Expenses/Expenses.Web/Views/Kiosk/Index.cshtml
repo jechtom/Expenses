@@ -1,0 +1,23 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Expenses Kiosk</title>
+    <script src="~/Scripts/jquery-2.1.0.js"></script>
+
+</head>
+<body>
+    <div data-bind="if: expenseSelection">
+        Expense selection
+    </div>
+    <div data-bind="if: mainScreen">
+        Expense details
+    </div>
+    <script type="text/javascript">
+        function viewModel() {
+            self = this;
+            self.state = ko.observable('expenseSelection');
+        }
+        var vm = new viewModel();
+        ko.applyBindings(vm);
+        </script>
+</body>
+</html>
