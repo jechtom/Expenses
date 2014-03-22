@@ -10,6 +10,7 @@ namespace Expenses.Web
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.EnableCors();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

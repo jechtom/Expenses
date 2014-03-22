@@ -1,23 +1,181 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@{
+    Layout = null;
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Expenses Kiosk</title>
     <script src="~/Scripts/jquery-2.1.0.js"></script>
-
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <style>
+        html {
+            font-size: 3em;
+            background-color: black;
+            color: white;
+            font-family:Tahoma;
+        }
+        a {
+            background-color: #07293b;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            margin: 6px;
+            display: block;
+        }
+        ul {
+            list-style: none;
+        }
+        a.selected {
+            background-color: #3f6000;
+        }
+    </style>
 </head>
 <body>
-    <div data-bind="if: expenseSelection">
+    <div data-bind="if: state() == 'expenseSelection'">
         Expense selection
+        <ul data-bind="foreach: expenses()" class="expenseList">
+            <li>
+                <a data-bind="click: $root.selectExpense" href="#">
+                    <img data-bind="attr { src: '/ExpenseIcon/GetFile/' + IconId }" class="icon" />
+                    <span data-bind="text: Name"></span>
+                </a>
+            </li>
+        </ul>
     </div>
-    <div data-bind="if: mainScreen">
-        Expense details
+    <div data-bind="if: state() == 'main' && expenseIsLoaded() == false">
+        Loading...
+    </div>
+    <div data-bind="if: state() == 'main' && expenseIsLoaded() == true">
+        Expense details <a href="#" data-bind="click: backToSelectExpense">Go back</a>
+        <div data-bind="with: expense">
+            <img data-bind="attr { src: '/ExpenseIcon/GetFile/' + IconId() }" class="icon" />
+            <span data-bind="text: ExpenseName"></span> | <span data-bind="text: CreatorFullName"></span> | Vychlastáno: <span data-bind="text: TotalQuantity"></span>l<br />
+            <ul data-bind="foreach: Users">
+                <li>
+                    <a href="#" data-bind="click: $root.AddExpenseForExistingUser"><span data-bind="text: FullName"></span> (<span data-bind="text: TotalQuantity"></span>l)</a>
+                </li>
+            </ul>
+            <a href="#" data-bind="click: $root.AddExpenseForNewUser">New user</a>
+        </div>
+    </div>
+    <div data-bind="if: state() == 'newExpenseItem'">
+        <span data-bind="text: expense().ExpenseName"></span> - new item <a href="#" data-bind="click: function() { state('main'); }">Go back</a>
+        <div data-bind="with: newExpenseItem">
+            User:
+            <input type="text" data-bind="value: UserFullName, visible: UserId() == null" />
+            <span data-bind="text: UserFullName, visible: UserId() != null"></span>
+            <br/>
+            Quantity:
+            <a href="#" data-bind="click: function() { Quantity(0.5); }, css: Quantity() == 0.5 ? 'selected' : ''">0,5&nbsp;l</a>
+            <a href="#" data-bind="click: function() { Quantity(0.3); }, css: Quantity() == 0.3 ? 'selected' : ''">0,3&nbsp;l</a>
+            <br />
+            <a href="#" data-bind="enable: UserFullName() != '', click: $root.newExpenseItemAdd">OK</a>
+        </div>
+    </div>
+    <div data-bind="if: state() == 'posting'">
+        Posting data...
     </div>
     <script type="text/javascript">
+        function expenseViewModel()
+        {
+            this.ExpenseName = ko.observable("");
+            this.CreatorFullName = ko.observable("");
+            this.TotalQuantity = ko.observable(0);
+            this.IconId = ko.observable(0);
+            this.Users = ko.observableArray([]);
+        }
+
+        function newExpenseItemViewModel(parent)
+        {
+            selfNewItem = this;
+            selfNewItem.ExpenseId = ko.computed(function() {
+                return parent.expenseId();
+            });
+            selfNewItem.Quantity = ko.observable(0.5);
+            selfNewItem.UserId = ko.observable(null);
+            selfNewItem.UserFullName = ko.observable(null);
+            selfNewItem.PresetByUser = function(user)
+            {
+                selfNewItem.Quantity(0.5);
+                if(user == null)
+                {
+                    selfNewItem.UserFullName(null);
+                    selfNewItem.UserId(null);
+                }
+                else
+                {
+                    selfNewItem.UserFullName(user.FullName());
+                    selfNewItem.UserId(user.UserId());
+                }
+            };
+        }
+
         function viewModel() {
             self = this;
-            self.state = ko.observable('expenseSelection');
+            self.expenses = ko.observable(null);
+            self.state = ko.observable("expenseSelection");
+            self.expenseId = ko.observable(0);
+            self.loadExpenses = function () {
+                $.getJSON("/api/kioskexpenses", null, function (data) { self.expenses(data); });
+            };
+            self.backToSelectExpense = function() {
+                self.expenseId(0);
+                self.state("expenseSelection");
+            };
+            self.selectExpense = function(data) {
+                self.expenseId(data.Id);
+                self.state("main");
+                self.expenseIsLoaded(false);
+                self.reload();
+            };
+            self.start = function() {
+                window.setInterval(vm.reload, 5000);
+            };
+            self.reload = function() {
+                var id = self.expenseId();
+                if(id == 0)
+                    return;
+                $.getJSON("/api/kiosk/" + id, null, function (data) {
+                    ko.mapping.fromJS(data, {
+                        // mapping settings
+                    }, self.expense);
+                    self.expenseIsLoaded(true);
+                });
+            };
+            self.expense = ko.observable(new expenseViewModel());
+            self.expenseIsLoaded = ko.observable(false);
+            self.newExpenseItem = ko.observable(new newExpenseItemViewModel(self));
+            self.newExpenseItemAdd = function()
+            {
+                var data = ko.mapping.toJS(self.newExpenseItem());
+                self.state("posting");
+                $.post("/api/kioskaddrow", data, function() {
+                    self.expenseIsLoaded(false);
+                    self.state("main");
+                    self.reload();
+                });
+            }
+
+            self.AddExpenseForNewUser = function()
+            {
+                self.newExpenseItem().PresetByUser(null);
+                self.state("newExpenseItem");
+            }
+
+            self.AddExpenseForExistingUser = function(user)
+            {
+                self.newExpenseItem().PresetByUser(user);
+                self.state("newExpenseItem");
+            }
+            self.formatDate = function(d)
+            {
+                return d;
+            }
         }
         var vm = new viewModel();
         ko.applyBindings(vm);
+        vm.loadExpenses();
+        vm.start();
         </script>
 </body>
 </html>

@@ -42,6 +42,7 @@ namespace Expenses.Web.Models
             this.AmountType = expense.AmountType;
             this.CreatorUserId = expense.Creator != null ? expense.Creator.Id : new int?();
             this.IconId = expense.Icon != null ? expense.Icon.Id : new int?();
+            this.IsKioskModeAllowed = expense.IsKioskModeAllowed;
         }
 
         public void ApplyToBO(Expense expense, UserService Users, ExpenseIconService Icons)
@@ -50,6 +51,7 @@ namespace Expenses.Web.Models
             expense.AmountType = this.AmountType;
             expense.Creator = Users.FetchById(this.CreatorUserId.Value);
             expense.Icon = Icons.FetchById(this.IconId.Value);
+            expense.IsKioskModeAllowed = this.IsKioskModeAllowed;
         }
         
         [Required]
@@ -63,5 +65,8 @@ namespace Expenses.Web.Models
 
         [Required]
         public int? IconId { get; set; }
+
+        [Required]
+        public bool IsKioskModeAllowed { get; set; }
     }
 }

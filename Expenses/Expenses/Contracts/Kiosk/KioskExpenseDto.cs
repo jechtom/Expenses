@@ -4,18 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Expenses.Contracts
+namespace Expenses.Contracts.Kiosk
 {
-    public class ExpenseLightDto
+    public class KioskExpenseDto
     {
         public int Id { get; set; }
-        
-        public string CreatorFullName { get; set; }
-
         public string Name { get; set; }
 
         public int IconId { get; set; }
-
-        public bool IsKioskModeAllowed { get; set; }
     }
 }

@@ -37,10 +37,10 @@
       <HintPath>..\..\External\Packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\..\..\External\Packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\..\External\Packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\..\External\Packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\..\External\Packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -60,11 +60,21 @@
     <Compile Include="BL\UnitOfWorkContext.cs" />
     <Compile Include="Contracts\ExpenseIconLightDto.cs" />
     <Compile Include="Contracts\ExpenseItemLightDto.cs" />
+    <Compile Include="Contracts\Kiosk\AddExpenseRowRequestDto.cs" />
+    <Compile Include="Contracts\Kiosk\IKioskService.cs" />
+    <Compile Include="Contracts\Kiosk\KioskExpenseDto.cs" />
+    <Compile Include="Contracts\Kiosk\KioskScreenDataDto.cs" />
+    <Compile Include="Contracts\Kiosk\KioskUserInfoDto.cs" />
     <Compile Include="Contracts\UserLightDto.cs" />
     <Compile Include="Migrations\201403021819224_Init2.cs" />
     <Compile Include="Migrations\201403021819224_Init2.Designer.cs">
       <DependentUpon>201403021819224_Init2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403201232274_KioskModeFlag.cs" />
+    <Compile Include="Migrations\201403201232274_KioskModeFlag.Designer.cs">
+      <DependentUpon>201403201232274_KioskModeFlag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SL\Kiosk\KioskService.cs" />
     <Compile Include="WindsorConfig.cs" />
     <Compile Include="Contracts\ExpenseLightDto.cs" />
     <Compile Include="BL\AmountType.cs" />
@@ -82,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Contracts\Kiosk\KiosService.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403021819224_Init2.resx">
       <DependentUpon>201403021819224_Init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403201232274_KioskModeFlag.resx">
+      <DependentUpon>201403201232274_KioskModeFlag.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

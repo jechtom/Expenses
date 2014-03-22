@@ -22,7 +22,10 @@
             Owned
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.User.Expenses)
+            @foreach(var e in Model.User.Expenses)
+            {
+                @Html.ActionLink(e.Name, "Details", "Expenses", new { id = e.Id }, null)<br />
+            }
             @if (Model.User.Expenses.Count == 0)
             {
             @:No owned expenses.
@@ -35,10 +38,16 @@
             Expenses
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.User.ExpenseItems)
-            @if (Model.User.Expenses.Count == 0)
+            @if (Model.User.ExpenseItems.Count == 0)
             {
                 @:No expenses.
+            }
+            else
+            {
+                foreach (var e in Model.User.ExpenseItems)
+                {
+                    @Html.ActionLink(e.Expense.Name + " " + e.CreatedDate.ToString(), "Details", "Expenses", new { id = e.Expense.Id }, null)<br />
+                }
             }
         </dd>
     </dl>

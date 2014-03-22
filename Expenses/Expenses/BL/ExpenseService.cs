@@ -26,5 +26,11 @@ namespace Expenses.BL
             DataContext.Expenses.Add(result);
             return result;
         }
+
+        public Contracts.ExpenseLightDto[] FetchAllWithKioskEnabled()
+        {
+            return DataContext.ExpensesAsLightDto
+                .Where(e => e.IsKioskModeAllowed == true).ToArray();
+        }
     }
 }

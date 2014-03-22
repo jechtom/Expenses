@@ -17,8 +17,7 @@ namespace Expenses.Console
         {
             var container = new WindsorContainer();
             container.Install(FromAssembly.Named("Expenses"));
-            container.Register(Component.For<BL.UnitOfWorkContext>().LifestyleTransient());
-
+            
             using(container.BeginScope())
             {
                 var iconsService = container.Resolve<BL.ExpenseIconService>();

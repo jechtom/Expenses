@@ -27,7 +27,8 @@ namespace Expenses.DL
                     Id = e.Id,
                     Name = e.Name,
                     CreatorFullName = e.Creator.FullName,
-                    IconId = e.Icon.Id
+                    IconId = e.Icon.Id,
+                    IsKioskModeAllowed = e.IsKioskModeAllowed
                 });
             }
         }

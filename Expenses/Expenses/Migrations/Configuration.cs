@@ -9,7 +9,7 @@ namespace Expenses.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Expenses.DL.DbDataContext context)

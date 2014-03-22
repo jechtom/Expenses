@@ -41,6 +41,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Expense.IsKioskModeAllowed, "Kiosk mode allowed?", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Expense.IsKioskModeAllowed)
+                @Html.ValidationMessageFor(model => model.Expense.IsKioskModeAllowed)
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.Expense.IconId, "Icon", new { @class = "control-label col-md-2" })
         </div>
         <div class="form-group">

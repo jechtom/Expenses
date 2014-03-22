@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <title>Kiosk API Test</title>
+        <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>        
+    </head>
+    <body>
+        <style>
+            td {
+                padding: 5px;
+                border: 1px solid #808080;
+            }
+        </style>
+        <table>
+            <tr>
+                <td>Expense Id:</td>
+                <td><input type="text" id="expenseid" value="1" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" id="callbutton" value="Call API" />
+                </td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td id="t-name"></td>
+            </tr>
+            <tr>
+                <td>Creator:</td>
+                <td id="t-creator"></td>
+            </tr>
+            <tr>
+                <td>Total quantity:</td>
+                <td id="t-quantity"></td>
+            </tr>
+            <tr>
+                <td>Image:</td>
+                <td><img id="i-icon" src="#" /></td>
+            </tr>
+            <tr>
+                <td>Users:</td>
+                <td id="t-users"></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" class="addrowbutton" data-q="0.3" value="Small beer" />
+                </td>
+                <td>
+                    <input type="button" class="addrowbutton" data-q="0.5" value="Large beer" />
+                </td>
+            </tr>
+        </table>
+        <script>
+            function Refresh() {
+                var expenseid = $("input#expenseid").val();
+                $.ajax({
+                    url: "http://expenses-stage.azurewebsites.net/api/kiosk/" + expenseid,
+                    cache: false,
+                    method: "GET",
+                    success: function (data) {
+                        $("#t-name").text(data.ExpenseName);
+                        $("#t-creator").text(data.CreatorFullName);
+                        $("#t-quantity").text(data.TotalQuantity);
+                        $("#i-icon").attr("src", "http://expenses-stage.azurewebsites.net/ExpenseIcon/GetFile/" + data.IconId);
+
+                        var html = "";
+                        for (var i = 0; i < data.Users.length; i++) {
+                            var user = data.Users[i];
+                            var value = user.FullName + " - " + user.TotalQuantity + "l";
+                            html += $('<div/>').text(value).html() + "<br/>";
+                        }
+                        $("#t-users").html(html);
+                    }
+                });
+            }
+
+            $(function () {
+                $("input#callbutton").click(function () {
+                    Refresh();
+                });
+
+                $("input.addrowbutton").click(function () {
+                    var expenseid = $("input#expenseid").val();
+                    var quantity = $(this).data("q");
+                    $.ajax({
+                        url: "http://expenses-stage.azurewebsites.net/api/kioskaddrow",
+                        data: {
+                            ExpenseId: expenseid,
+                            Quantity: quantity,
+                            UserId: 1
+                        },
+                        cache: false,
+                        method: "POST",
+                        success: function (data) {
+                            alert('OK');
+                            Refresh();
+                        },
+                        
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
