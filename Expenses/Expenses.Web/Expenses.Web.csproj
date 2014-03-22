@@ -209,6 +209,7 @@
     <Compile Include="Controllers\ExpenseIconController.cs" />
     <Compile Include="Controllers\ExpenseItemController.cs" />
     <Compile Include="Controllers\KioskController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -300,6 +301,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\ExpenseItem\CreateAndEdit.cshtml" />
     <Content Include="Views\Kiosk\Index.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

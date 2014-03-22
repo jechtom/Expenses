@@ -45,7 +45,8 @@ namespace Expenses.DL
                     Amount = e.Amount,
                     CreatorFullName = e.Creator.FullName,
                     ExpenseId = e.Expense.Id,
-                    CreatedDate = e.CreatedDate
+                    CreatedDate = e.CreatedDate,
+                    CreatorId = e.Creator.Id
                 });
             }
         }

@@ -24,6 +24,8 @@ namespace Expenses.BL
 
         public bool IsKioskModeAllowed { get; set; }
 
+        public virtual ExpensePricing Pricing { get; set; }
+
         public decimal GetTotalQuantity()
         {
             return Items.Sum(i => i.Amount);

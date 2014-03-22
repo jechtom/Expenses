@@ -13,5 +13,6 @@ namespace Expenses.Contracts
         public decimal Amount { get; set; }
         public string CreatorFullName { get; set; }
         public DateTime CreatedDate { get; set; }
+        public int CreatorId { get; set; }
     }
 }

@@ -1,0 +1,41 @@
+﻿@model Expenses.Contracts.ExpensesReportDto
+
+@{
+    ViewBag.Title = "Expenses Report";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Expenses</h4>
+    <hr />
+    @if (Model.Users.Length == 0)
+    {
+    <p>No records.</p>
+    }
+    <div class="row">
+        <div class="col-md-5">
+            <table class="table">
+                @foreach (var u in Model.Users)
+                {
+                    <tr>
+                        <th colspan="2" style="font-size: 2em; border-top: dotted 2px #808080">
+                            @u.FullName
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Owner</th>
+                        <th>Amount</th>
+                    </tr>
+                    foreach (var cd in u.CostDetails)
+                    {
+                        <tr>
+                            <td>@cd.FullName</td>
+                            <td>@cd.Cost.ToString("# ###") Kč</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>

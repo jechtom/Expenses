@@ -52,14 +52,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\CostCalculatorItem.cs" />
+    <Compile Include="BL\CostCalculatorStrategy.cs" />
     <Compile Include="BL\DataContextService.cs" />
     <Compile Include="BL\ExpenseIconService.cs" />
     <Compile Include="BL\ExpenseItemService.cs" />
+    <Compile Include="BL\ExpensePricing.cs" />
+    <Compile Include="BL\ExpensesReportService.cs" />
     <Compile Include="BL\UserService.cs" />
     <Compile Include="BL\ExpenseService.cs" />
     <Compile Include="BL\UnitOfWorkContext.cs" />
     <Compile Include="Contracts\ExpenseIconLightDto.cs" />
     <Compile Include="Contracts\ExpenseItemLightDto.cs" />
+    <Compile Include="Contracts\ExpensesReportDto.cs" />
+    <Compile Include="Contracts\ExpensesUserReportDto.cs" />
+    <Compile Include="Contracts\ExpensesCostDetailDto.cs" />
     <Compile Include="Contracts\Kiosk\AddExpenseRowRequestDto.cs" />
     <Compile Include="Contracts\Kiosk\IKioskService.cs" />
     <Compile Include="Contracts\Kiosk\KioskExpenseDto.cs" />
@@ -73,6 +80,10 @@
     <Compile Include="Migrations\201403201232274_KioskModeFlag.cs" />
     <Compile Include="Migrations\201403201232274_KioskModeFlag.Designer.cs">
       <DependentUpon>201403201232274_KioskModeFlag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403221221455_Pricing.cs" />
+    <Compile Include="Migrations\201403221221455_Pricing.Designer.cs">
+      <DependentUpon>201403221221455_Pricing.cs</DependentUpon>
     </Compile>
     <Compile Include="SL\Kiosk\KioskService.cs" />
     <Compile Include="WindsorConfig.cs" />
@@ -104,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403201232274_KioskModeFlag.resx">
       <DependentUpon>201403201232274_KioskModeFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403221221455_Pricing.resx">
+      <DependentUpon>201403221221455_Pricing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
