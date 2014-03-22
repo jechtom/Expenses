@@ -43,6 +43,7 @@ namespace Expenses.Web.Controllers
 
         //
         // GET: /Expenses/Create
+        [Authorize(Roles = "Administrators")]
         public ActionResult Create(int? userId)
         {
             var model = new Models.ExpensesCreateAndEditModel(true, Icons.FetchAll(), Users.FetchAll());
@@ -53,6 +54,7 @@ namespace Expenses.Web.Controllers
 
         //
         // POST: /Expenses/Create
+        [Authorize(Roles = "Administrators")]
         [HttpPost]
         public ActionResult Create([Bind(Prefix="Expense")] Models.ExpenseModel value)
         {
@@ -75,6 +77,7 @@ namespace Expenses.Web.Controllers
 
         //
         // GET: /Expenses/Edit/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Edit(int id)
         {
             var item = Expenses.FetchById(id);
@@ -88,6 +91,7 @@ namespace Expenses.Web.Controllers
 
         //
         // POST: /Expenses/Edit/5
+        [Authorize(Roles = "Administrators")]
         [HttpPost]
         public ActionResult Edit(int id, [Bind(Prefix="Expense")] Models.ExpenseModel value)
         {
@@ -113,6 +117,7 @@ namespace Expenses.Web.Controllers
 
         //
         // GET: /Expenses/Delete/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -120,6 +125,7 @@ namespace Expenses.Web.Controllers
 
         //
         // POST: /Expenses/Delete/5
+        [Authorize(Roles = "Administrators")]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

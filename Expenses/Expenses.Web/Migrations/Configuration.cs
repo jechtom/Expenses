@@ -1,5 +1,6 @@
 namespace Expenses.Web.Migrations
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -26,6 +27,13 @@ namespace Expenses.Web.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            context.Roles.AddOrUpdate(
+                r => r.Name,
+                new IdentityRole("Administrators")
+            );
+
+
         }
     }
 }

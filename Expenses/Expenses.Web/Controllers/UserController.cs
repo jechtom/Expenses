@@ -36,6 +36,7 @@ namespace Expenses.Web.Controllers
 
         //
         // GET: /Expenses/Create
+        [Authorize(Roles = "Administrators")]
         public ActionResult Create()
         {
             var model = new Models.UserCreateAndEditModel(true);
@@ -45,6 +46,7 @@ namespace Expenses.Web.Controllers
 
         //
         // POST: /Expenses/Create
+        [Authorize(Roles = "Administrators")]
         [HttpPost]
         public ActionResult Create([Bind(Prefix="User")] Models.UserModel value)
         {
@@ -67,6 +69,7 @@ namespace Expenses.Web.Controllers
 
         //
         // GET: /Expenses/Edit/5
+        [Authorize(Roles = "Administrators")]
         public ActionResult Edit(int id)
         {
             var item = Users.FetchById(id);
@@ -80,6 +83,7 @@ namespace Expenses.Web.Controllers
 
         //
         // POST: /Expenses/Edit/5
+        [Authorize(Roles = "Administrators")]
         [HttpPost]
         public ActionResult Edit(int id, [Bind(Prefix="User")] Models.UserModel value)
         {

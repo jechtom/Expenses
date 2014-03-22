@@ -9,6 +9,10 @@ using System.Web;
 using System.Web.Mvc;
 using Castle.MicroKernel.Lifestyle;
 using System.Web.Http;
+using Expenses.Web.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace Expenses.Web.App_Start
 {
@@ -44,6 +48,18 @@ namespace Expenses.Web.App_Start
             // scope
             container.Register(Component.For<IDisposable>().Named(ScopeComponentName)
                 .UsingFactoryMethod((f, c) => container.BeginScope()).LifestylePerWebRequest());
+
+            // security - user manager
+            container.Register(Component.For<UserManager<ApplicationUser>>().LifestylePerWebRequest());
+
+            // security - identity user store
+            container.Register(Component.For<IUserStore<ApplicationUser>>().ImplementedBy<UserStore<ApplicationUser>>()
+                .DependsOn(ServiceOverride.ForKey<DbContext>().Eq("UserStoreContext"))
+                .LifestylePerWebRequest());
+
+            // security - identity user store context
+            container.Register(Component.For<DbContext>().Named("UserStoreContext").ImplementedBy<ApplicationDbContext>()
+                .LifestylePerWebRequest());
         }
     }
 }
